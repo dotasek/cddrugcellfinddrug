@@ -1,6 +1,6 @@
 import sys
 
-workingdir = "../../../DrugCell/data/"
+workingdir = "/opt/drugcell/DrugCell/data/"
 gene2idfile = workingdir + "gene2ind.txt"
 drug2idfile = workingdir + "drug2ind.txt"
 

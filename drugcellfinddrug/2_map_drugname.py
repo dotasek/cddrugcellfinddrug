@@ -1,6 +1,6 @@
 import sys
 
-drugmappingfile = "../../case1_oracle/drug_data/compound_names.txt" 
+drugmappingfile = "/opt/drugcell/drug_data/compound_names.txt" 
 
 
 def main():
