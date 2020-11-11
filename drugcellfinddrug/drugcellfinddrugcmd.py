@@ -84,7 +84,23 @@ def main(args):
 
     try:
         inputfile = os.path.abspath(theargs.input)
-        theres = {'drugCell result':'success'}
+        os.mkdir("/tmp/drugcellinput")
+        
+        genes = read_inputfile(inputfile)
+        genes = genes.strip(',').strip('\n').split(',')
+
+        f = open("/tmp/drugcellinput/input_genes.txt", "a+")
+        for gene in genes:
+            f.write(gene + "\n")
+        f.close()
+
+        os.chdir("/opt/conda/bin")
+
+        os.system("commandline_test_cpu.sh /tmp/drugcellinput")
+
+        tsv = read_inputfile("/tmp/drugcellinput/output.txt")
+
+        theres = {'drugCell result': tsv}
         if theres is None:
             sys.stderr.write('No drugs found\n')
         else:
