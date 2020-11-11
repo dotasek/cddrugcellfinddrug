@@ -7,11 +7,13 @@ COPY dist/*.whl /tmp/drugcell/
 
 RUN pip install /tmp/drugcell/drugcellfinddrug*whl
 
+COPY assets/*.yml /tmp/drugcell/
+
+RUN conda env create -f /tmp/drugcell/environment_cpu_linux.yml
+
 RUN rm -rf /tmp/drugcell
 
 RUN mkdir /opt/drugcell
-
-
 
 ENTRYPOINT ["/opt/conda/bin/drugcellfinddrugcmd.py"]
 CMD ["--help"]
