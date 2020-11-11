@@ -19,14 +19,14 @@ Version `0.3.0` can be directly pulled from `Dockerhub <https://hub.docker.com/>
 
 .. code-block::
 
-   docker pull coleslawndex/cdgprofilergenestoterm:0.3.0
+   docker pull dotasekndex/cdgprofilergenestoterm:0.3.0
 
 Building
 --------
 
 .. code-block::
 
-   git clone https://github.com/idekerlab/cdgprofilergenestoterm
+   git clone https://github.com/dotasek/cdgprofilergenestoterm
    cd cdgprofilergenestoterm
    make dockerbuild
 
@@ -63,7 +63,7 @@ Usage
 
 .. code-block::
 
-   docker run -v coleslawndex/cdgprofilergenestoterm:0.3.0 -h
+   docker run -v dotasekndex/cdgprofilergenestoterm:0.3.0 -h
 
 
 
