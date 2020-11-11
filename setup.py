@@ -56,7 +56,11 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    scripts=['drugcellfinddrug/drugcellfinddrugcmd.py'],
+    scripts=[
+        'drugcellfinddrug/drugcellfinddrugcmd.py',
+        'drugcellfinddrug/1_build_input.py',
+        'drugcellfinddrug/2_map_drugname.py',
+    ],
     test_suite='tests',
     tests_require=test_requirements
 )
