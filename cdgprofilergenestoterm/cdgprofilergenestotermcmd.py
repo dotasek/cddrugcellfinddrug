@@ -4,7 +4,6 @@ import os
 import sys
 import argparse
 import json
-from gprofiler import GProfiler
 import cdgprofilergenestoterm
 
 def _parse_arguments(desc, args):
@@ -48,77 +47,6 @@ def read_inputfile(inputfile):
     """
     with open(inputfile, 'r') as f:
         return f.read()
-
-
-def run_gprofiler(inputfile, theargs,
-                  gprofwrapper=GProfiler(user_agent='cdgprofilergenestoterm/' +
-                                         cdgprofilergenestoterm.__version__,
-                                         return_dataframe=True)):
-    """
-    todo
-
-    :param inputfile:
-    :param theargs:
-    :param gprofwrapper:
-    :return:
-    """
-    genes = read_inputfile(inputfile)
-    genes = genes.strip(',').strip('\n').split(',')
-    genelist_size = len(genes)
-    if genes is None or (genelist_size == 1 and len(genes[0].strip()) == 0):
-        sys.stderr.write('No genes found in input')
-        return None
-    if genelist_size > theargs.maxgenelistsize:
-        sys.stderr.write('Gene list size of ' +
-                         str(genelist_size) +
-                         ' exceeds max gene list size of ' +
-                         str(theargs.maxgenelistsize))
-        return None
-    df_result = gprofwrapper.profile(query=genes, domain_scope="known",
-                                     organism=theargs.organism,
-                                     user_threshold=theargs.maxpval,
-                                     no_evidences=theargs.omit_intersections)
-    if df_result.shape[0] == 0:
-        return None
-
-    df_result['Jaccard'] = 1.0 / (1.0 / df_result['precision'] +
-                                  1.0 / df_result['recall'] - 1)
-
-    # filter out any rows where min overlap is not met
-    df_result.drop(df_result[df_result.Jaccard < theargs.minoverlap].index,
-                   inplace=True)
-
-    # filter out any rows in source exclude list
-    if theargs.excludesource is not None:
-        for a_source in theargs.excludesource.split(','):
-            df_result.drop(df_result[df_result.source == a_source].index,
-                           inplace=True)
-
-    if df_result.shape[0] == 0:
-        return None
-
-    # sort by Jaccard and fallback to p_value
-    df_result.sort_values(['Jaccard', 'p_value'],
-                          ascending=[False, True], inplace=True)
-
-    df_result.reset_index(drop=True, inplace=True)
-
-    df_result = df_result[:1]
-    df_result = df_result.round({'Jaccard': theargs.precision})
-    theres = {'name': df_result['name'][0],
-              'source': df_result['source'][0],
-              'sourceTermId': df_result['native'][0],
-              'p_value': df_result['p_value'][0],
-              'jaccard': df_result['Jaccard'][0],
-              'description': df_result['description'][0],
-              'term_size': int(df_result['term_size'][0])}
-
-    if theargs.omit_intersections is True:
-        theres['intersections'] = []
-    else:
-        theres['intersections'] = df_result['intersections'][0]
-    return theres
-
 
 def main(args):
     """

@@ -19,8 +19,7 @@ with open(os.path.join('cdgprofilergenestoterm', '__init__.py')) as ver_file:
             version=re.sub("'", "", line[line.index("'"):])
 
 requirements = [
-    'pandas',
-    'gprofiler-official'
+
 ]
 
 test_requirements = [
