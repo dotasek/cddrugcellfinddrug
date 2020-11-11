@@ -13,7 +13,7 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 
-with open(os.path.join('cdgprofilergenestoterm', '__init__.py')) as ver_file:
+with open(os.path.join('drugcellfinddrug', '__init__.py')) as ver_file:
     for line in ver_file:
         if line.startswith('__version__'):
             version=re.sub("'", "", line[line.index("'"):])
@@ -27,23 +27,23 @@ test_requirements = [
 ]
 
 setup(
-    name='cdgprofilergenestoterm',
+    name='drugcellfinddrug',
     version=version,
     description="Maps genes to terms",
     long_description=readme + '\n\n' + history,
     author="Christopher Churas",
     author_email='churas.camera@gmail.com',
-    url='https://github.com/ndexbio/cdgprofilergenestoterm',
+    url='https://github.com/ndexbio/drugcellfinddrug',
     packages=[
-        'cdgprofilergenestoterm',
+        'drugcellfinddrug',
     ],
-    package_dir={'cdgprofilergenestoterm':
-                 'cdgprofilergenestoterm'},
+    package_dir={'drugcellfinddrug':
+                 'drugcellfinddrug'},
     include_package_data=True,
     install_requires=requirements,
     license="BSD license",
     zip_safe=False,
-    keywords='cdgprofilergenestoterm',
+    keywords='drugcellfinddrug',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
@@ -56,7 +56,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
     ],
-    scripts=['cdgprofilergenestoterm/cdgprofilergenestotermcmd.py'],
+    scripts=['drugcellfinddrug/drugcellfinddrugcmd.py'],
     test_suite='tests',
     tests_require=test_requirements
 )

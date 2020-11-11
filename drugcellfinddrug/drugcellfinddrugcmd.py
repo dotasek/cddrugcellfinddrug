@@ -4,7 +4,7 @@ import os
 import sys
 import argparse
 import json
-import cdgprofilergenestoterm
+import drugcellfinddrug
 
 def _parse_arguments(desc, args):
     """
