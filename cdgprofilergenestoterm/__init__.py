@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
 
-__author__ = 'Christopher Churas'
-__email__ = 'churas.camera@gmail.com'
-__version__ = '0.3.0'
+__author__ = 'David Otasek'
+__email__ = 'dotasek.dev@gmail.com'
+__version__ = '0.0.1'
