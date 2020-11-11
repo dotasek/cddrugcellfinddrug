@@ -93,8 +93,8 @@ install: clean ## install the package to the active Python's site-packages
 
 dockerbuild: dist ## build docker image and store in local repository
 	@cv=`grep '__version__' cdgprofilergenestoterm/__init__.py | sed "s/^.*= *'//" | sed "s/'.*//"`; \
-	docker build -t coleslawndex/cdgprofilergenestoterm:$$cv -f docker/Dockerfile .
+	docker build -t dotasekndex/cdgprofilergenestoterm:$$cv -f docker/Dockerfile .
 
 dockerpush: dockerbuild ## push image to dockerhub
 	@cv=`grep '__version__' cdgprofilergenestoterm/__init__.py | sed "s/^.*= *'//" | sed "s/'.*//"`; \
-	docker push coleslawndex/cdgprofilergenestoterm:$$cv
+	docker push dotasekndex/cdgprofilergenestoterm:$$cv
