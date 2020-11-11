@@ -156,9 +156,9 @@ def main(args):
 
     try:
         inputfile = os.path.abspath(theargs.input)
-        theres = run_gprofiler(inputfile, theargs)
+        theres = {'drugCell result':'success'}
         if theres is None:
-            sys.stderr.write('No terms found\n')
+            sys.stderr.write('No drugs found\n')
         else:
             json.dump(theres, sys.stdout)
         sys.stdout.flush()
