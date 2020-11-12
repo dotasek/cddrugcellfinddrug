@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import subprocess
 import sys
 import argparse
 import json
@@ -96,7 +97,12 @@ def main(args):
 
         os.chdir("/opt/conda/bin")
 
-        os.system("commandline_test_cpu.sh /tmp/drugcellinput")
+        drugcell_pipeline = "commandline_test_cpu.sh"
+        drugcell_input_directory = "/tmp/drugcellinput"
+
+        with open('/tmp/drugcellinput/output.log', 'a') as stdout:
+            with open('/tmp/drugcellinput/error.log', 'a') as stderr:
+                subprocess.call([drugcell_pipeline, drugcell_input_directory], stdout=stdout, stderr=stderr)
 
         tsv = read_inputfile("/tmp/drugcellinput/output.txt")
 
