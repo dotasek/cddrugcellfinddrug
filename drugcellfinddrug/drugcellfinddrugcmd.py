@@ -87,8 +87,8 @@ def main(args):
         inputfile = os.path.abspath(theargs.input)
         os.mkdir("/tmp/drugcellinput")
         
-        genes = read_inputfile(inputfile)
-        genes = genes.strip(',').strip('\n').split(',')
+        inputGenes = read_inputfile(inputfile)
+        genes = inputGenes.strip(',').strip('\n').split(',')
 
         f = open("/tmp/drugcellinput/input_genes.txt", "a+")
         for gene in genes:
@@ -104,9 +104,10 @@ def main(args):
             with open('/tmp/drugcellinput/error.log', 'a') as stderr:
                 subprocess.call([drugcell_pipeline, drugcell_input_directory], stdout=stdout, stderr=stderr)
 
-        tsv = read_inputfile("/tmp/drugcellinput/output.txt")
+        with open('/tmp/drugcellinput/output.json') as f:
+            jsonResult = json.load(f)
 
-        theres = {'drugCell result': tsv}
+        theres = {'inputGenes': inputGenes, 'predictions' : jsonResult['predictions']}
         if theres is None:
             sys.stderr.write('No drugs found\n')
         else:
