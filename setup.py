@@ -59,7 +59,7 @@ setup(
     scripts=[
         'drugcellfinddrug/drugcellfinddrugcmd.py',
         'drugcellfinddrug/1_build_input.py',
-        'drugcellfinddrug/2_map_drugname.py',
+        'drugcellfinddrug/2_generate_output.py',
         'drugcellfinddrug/commandline_test_cpu.sh'
     ],
     test_suite='tests',
