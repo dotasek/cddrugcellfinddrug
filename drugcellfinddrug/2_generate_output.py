@@ -66,7 +66,7 @@ def main():
 				for i in range(top_n):
 					line = fi.readline()
 					tokens = line.strip().split('\t')
-					top_pathways.append({'pathway_name': tokens[4], 'RLIPP': float(tokens[3])})
+					top_pathways.append({'GO_id': tokens[1], 'pathway_name': tokens[4], 'RLIPP': float(tokens[3])})
 	
 			# add a line to .json
 			output['predictions'].append({'drug_id': drug_id, 'drug_name': drug_name, 'predicted_AUC': predicted, 'drug_smiles': smiles, 'top_pathways': top_pathways})
