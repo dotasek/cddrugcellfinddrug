@@ -7,6 +7,7 @@ import argparse
 import json
 import drugcellfinddrug
 
+
 def _parse_arguments(desc, args):
     """
     Parses command line arguments
@@ -49,6 +50,7 @@ def read_inputfile(inputfile):
     with open(inputfile, 'r') as f:
         return f.read()
 
+
 def main(args):
     """
     Main entry point for program
@@ -86,7 +88,7 @@ def main(args):
     try:
         inputfile = os.path.abspath(theargs.input)
         os.mkdir("/tmp/drugcellinput")
-        
+
         inputGenes = read_inputfile(inputfile)
         genes = inputGenes.strip(',').strip('\n').split(',')
 
@@ -102,12 +104,20 @@ def main(args):
 
         with open('/tmp/drugcellinput/output.log', 'a') as stdout:
             with open('/tmp/drugcellinput/error.log', 'a') as stderr:
-                subprocess.call([drugcell_pipeline, drugcell_input_directory], stdout=stdout, stderr=stderr)
+                subprocess.call(
+                    [drugcell_pipeline, drugcell_input_directory], stdout=stdout, stderr=stderr)
 
         with open('/tmp/drugcellinput/output.json') as f:
             jsonResult = json.load(f)
 
-        theres = {'inputGenes': inputGenes, 'predictions' : jsonResult['predictions']}
+        with open('/tmp/drugcellinput/filtered_genes.txt') as f:
+            filteredGenes = f.readlines()
+
+        theres = {
+            'inputGenes': inputGenes,
+            'filteredGenes' : filteredGenes,
+            'predictions': jsonResult['predictions']
+        }
         if theres is None:
             sys.stderr.write('No drugs found\n')
         else:
