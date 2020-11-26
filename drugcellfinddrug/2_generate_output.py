@@ -59,14 +59,14 @@ def main():
 				pass
 		
 			# collect the top RLIPP pathways	
-			rlipp_file = rlippfile_prefix + drug_id + ".names"
+			rlipp_file = rlippfile_prefix + drug_id + ".tsv"
 			top_pathways = []
 	
 			with open(rlipp_file, 'r') as fi:
 				for i in range(top_n):
 					line = fi.readline()
 					tokens = line.strip().split('\t')
-					top_pathways.append({'GO_id': tokens[1], 'pathway_name': tokens[4], 'RLIPP': float(tokens[3])})
+					top_pathways.append({'GO_id': tokens[0], 'pathway_name': tokens[1], 'RLIPP': float(tokens[2]), 'pathway_genes': tokens[-1]})
 	
 			# add a line to .json
 			output['predictions'].append({'drug_id': drug_id, 'drug_name': drug_name, 'predicted_AUC': predicted, 'drug_smiles': smiles, 'top_pathways': top_pathways})
