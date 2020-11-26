@@ -40,11 +40,16 @@ def main():
 
 	# filtered genes - non-DrugCell genes
 	new_inputgenes = set(gene2id.keys()).intersection(inputgenes)
-	filtered_genes = set(inputgenes).difference(new_inputgenes)
+	invalid_genes = set(inputgenes).difference(new_inputgenes)
 
 	# log filtered genes
-	with open(outputdir + "filtered_genes.txt", 'w') as fo:
-		fo.write('\n'.join(list(filtered_genes)))
+	with open(outputdir + "valid_genes.txt", 'w') as fo:
+		fo.write('\n'.join(list(new_inputgenes)))
+
+
+	# log filtered genes
+	with open(outputdir + "invalid_genes.txt", 'w') as fo:
+		fo.write('\n'.join(list(invalid_genes)))
 
 	# build the genotype of cell
 	vec = [0] * len(gene2id)

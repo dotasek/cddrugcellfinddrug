@@ -110,12 +110,16 @@ def main(args):
         with open('/tmp/drugcellinput/output.json') as f:
             jsonResult = json.load(f)
 
-        with open('/tmp/drugcellinput/filtered_genes.txt') as f:
-            filteredGenes = f.readlines()
+        with open('/tmp/drugcellinput/valid_genes.txt') as f:
+            validGenes = f.readlines()
+
+        with open('/tmp/drugcellinput/invalid_genes.txt') as f:
+            invalidGenes = f.readlines()
 
         theres = {
             'inputGenes': inputGenes,
-            'filteredGenes' : filteredGenes,
+            'validGenes' : validGenes,
+            'invalidGenes' : invalidGenes,
             'predictions': jsonResult['predictions']
         }
         if theres is None:
